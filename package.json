@@ -1,0 +1,15 @@
+{
+  "name": "ops360-ia",
+  "version": "3.0.0",
+  "private": true,
+  "description": "OPS 360° IA (Aurora) — assistente de SST 100% local: vários chats com memória, leitura e geração de documentos, abas criadas pela IA e dock inteligente do Slack.",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "npm run build && node tests/unit.mjs && node tests/e2e.mjs",
+    "test:unit": "node scripts/build.mjs && node tests/unit.mjs",
+    "test:e2e": "node scripts/build.mjs && node tests/e2e.mjs",
+    "demo": "node scripts/build.mjs && node tests/serve.mjs 8080"
+  },
+  "license": "UNLICENSED"
+}

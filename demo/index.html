@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OPS 360° — demonstração da IA v3</title>
+<style>
+  /* Simulação simplificada do layout do OPS 360° (somente para testar o módulo da IA) */
+  :root{--bg:#eef2f7;--card:#fff;--line:#e3e8ef;--text:#0f172a;--muted:#5b6b7c;--blue:#2563eb}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);font-family:"Segoe UI",system-ui,Arial,sans-serif;color:var(--text)}
+  .topbar{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:18px;padding:10px 22px}
+  .topbar .brand{font-weight:800;font-size:18px}
+  .tabs{display:flex;gap:6px;flex-wrap:wrap}
+  .tab{border:0;background:transparent;padding:9px 16px;border-radius:999px;font-weight:650;color:var(--muted);cursor:pointer;font-size:14px}
+  .tab.active{background:var(--blue);color:#fff;box-shadow:0 4px 12px rgba(37,99,235,.3)}
+  main{max-width:1400px;margin:0 auto;padding:22px}
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;min-height:140px}
+  .card.sel{border:2px solid #7dd3c0}
+  /* painel antigo da IA (será substituído automaticamente pela v3) */
+  .legacy{background:#0b1322;color:#fff;border-radius:22px;padding:18px;height:600px;display:flex;flex-direction:column}
+  .legacy header{display:flex;align-items:center;gap:10px;font-weight:800;font-size:22px}
+  .legacy header .r{margin-left:auto;display:flex;gap:8px;font-size:13px}
+  .legacy .msgs{flex:1;margin:12px 0;border:1px solid #1f2a3d;border-radius:14px}
+  .legacy input{width:100%;padding:14px 18px;border-radius:30px;border:1px solid #2dd4bf;background:#0b1322;color:#fff}
+  /* botão flutuante do Slack (como no app) */
+  .slack-fab{position:fixed;right:22px;bottom:18px;display:flex;align-items:center;gap:10px;background:#4a154b;color:#fff;border:0;border-radius:28px;padding:18px 28px;font-weight:800;font-size:16px;cursor:pointer;box-shadow:0 10px 26px rgba(74,21,75,.35);z-index:50}
+  .slack-panel{position:fixed;right:22px;bottom:90px;width:320px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;box-shadow:0 14px 40px rgba(0,0,0,.18);display:none;z-index:50}
+  .slack-panel.open{display:block}
+  .page{display:none}.page.show{display:block}
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="brand">OPS 360°</div>
+    <nav class="tabs" role="tablist">
+      <button class="tab active" data-page="inicio">Início</button>
+      <button class="tab" data-page="dashboard">Dashboard</button>
+      <button class="tab" data-page="inspecoes">Inspeções</button>
+      <button class="tab" data-page="relatorios">Relatórios</button>
+    </nav>
+  </div>
+  <main>
+    <section class="page show" id="inicio">
+      <!-- Painel antigo "OPS360° IA" — a v3 detecta e monta no lugar -->
+      <div class="legacy">
+        <header>OPS360° <span style="background:#2dd4bf;color:#042f2c;border-radius:6px;padding:1px 8px;font-size:13px">IA</span>
+          <div class="r"><span>100% local · offline</span><button>Nova conversa</button></div></header>
+        <div class="msgs"></div>
+        <input placeholder='Pergunte ou peça — ex.: "APR de trabalho em altura em PDF", "o que diz a NR-12?"'>
+      </div>
+      <div class="cards"><div class="card sel"><b>Resumo do dia</b><p>Inspeções pendentes: 3</p></div><div class="card"><b>Avisos</b><p>Reciclagem NR-35 da equipe de manutenção vence em 30 dias.</p></div></div>
+    </section>
+    <section class="page" id="dashboard"><div class="card"><b>Dashboard do app</b><p>Conteúdo original do OPS 360°.</p></div></section>
+    <section class="page" id="inspecoes"><div class="card"><b>Inspeções</b></div></section>
+    <section class="page" id="relatorios"><div class="card"><b>Relatórios</b></div></section>
+  </main>
+  <button class="slack-fab" id="slackFab" aria-label="Slack"><svg width="22" height="22" viewBox="0 0 54 54"><rect width="54" height="54" rx="10" fill="#fff" opacity=".9"/></svg>Slack</button>
+  <div class="slack-panel" id="slackPanel"><b>Slack (simulação)</b><p>Painel de mensagens do Slack do app.</p></div>
+  <script>
+    // navegação simulada do app
+    document.querySelectorAll('.tab').forEach(function (b) {
+      b.addEventListener('click', function () {
+        document.querySelectorAll('.tab').forEach(function (x) { x.classList.toggle('active', x === b); });
+        document.querySelectorAll('.page').forEach(function (p) { p.classList.toggle('show', p.id === b.dataset.page); });
+      });
+    });
+    document.getElementById('slackFab').addEventListener('click', function () {
+      document.getElementById('slackPanel').classList.toggle('open');
+    });
+    // Configuração opcional da IA (antes de carregar o script)
+    window.OPS360IA_CONFIG = { userName: null };
+  </script>
+  <script src="../dist/ops360-ia.js"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+// ==UserScript==
+// @name         OPS 360° IA — Aurora v3
+// @namespace    ops360
+// @version      3.0.0
+// @description  Assistente de SST 100% local do OPS 360°: vários chats com memória, anexos com instrução, leitura e geração de documentos, abas criadas pela IA e dock inteligente do Slack.
+// @match        *://*/*
+// @match        file:///*
+// @grant        GM_xmlhttpRequest
+// @connect      *
+// @run-at       document-idle
+// @noframes
+// ==/UserScript==
+/*
+ * OPS 360° IA — Aurora v3.0.0
+ * ---------------------------------------------------------------------------
+ * Arquivo único, sem dependências. Funciona de 3 formas:
+ *   1) <script src="ops360-ia.js"></script> no final do index.html do OPS 360°
+ *   2) Userscript (Tampermonkey/Violentmonkey) — só ativa em páginas do OPS 360°
+ *   3) Extensão/página interna — basta incluir o arquivo
+ * Configuração opcional ANTES do script:  window.OPS360IA_CONFIG = { ... }
+ * Veja LEIA-ME.md para todas as opções e para o padrão de abas (blueprints).
+ * O código-fonte modular fica em src/ e é montado por scripts/build.mjs.
+ */
